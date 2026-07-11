@@ -349,7 +349,7 @@ p { margin: 0; }
   color: var(--muted);
 }
 .marquee-track span::after {
-  content: "—";
+  content: "\2022";
   margin-left: 30px;
   color: var(--line-strong);
   font-style: normal;
