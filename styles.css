@@ -296,6 +296,45 @@ p { margin: 0; }
   font-weight: 400;
 }
 .hero h1 .dim { color: var(--muted-dim); }
+
+/* ---------- Kinetic word reveal (hero headline) ---------- */
+.hero h1 .reveal-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(9px);
+  transform: translateY(10px);
+  animation: word-reveal 0.9s cubic-bezier(.19,.84,.28,1) both;
+}
+@keyframes word-reveal {
+  0% {
+    opacity: 0;
+    filter: blur(9px);
+    transform: translateY(10px);
+    text-shadow: 0 0 0 rgba(240,240,240,0);
+  }
+  45% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+  55% {
+    text-shadow: 0 0 26px rgba(240,240,240,0.65);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    text-shadow: 0 0 0 rgba(240,240,240,0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .reveal-word {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
 .hero-sub {
   max-width: 46ch;
   margin: 26px auto 0;

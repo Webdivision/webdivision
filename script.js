@@ -40,4 +40,42 @@ document.addEventListener("DOMContentLoaded", () => {
   // Current year in footer
   const yearEl = document.querySelector("[data-year]");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Kinetic word reveal for the hero headline
+  const heroHeading = document.querySelector(".hero h1");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (heroHeading && !reduceMotion) {
+    const nodes = Array.from(heroHeading.childNodes);
+    heroHeading.innerHTML = "";
+    let wordIndex = 0;
+    const STAGGER = 0.08; // seconds between each word
+
+    nodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        // Split on whitespace but keep the whitespace tokens so spacing/wrapping stays natural
+        const parts = node.textContent.split(/(\s+)/);
+        parts.forEach((part) => {
+          if (part === "") return;
+          if (/^\s+$/.test(part)) {
+            heroHeading.appendChild(document.createTextNode(part));
+            return;
+          }
+          const span = document.createElement("span");
+          span.className = "reveal-word";
+          span.textContent = part;
+          span.style.animationDelay = (wordIndex * STAGGER).toFixed(2) + "s";
+          wordIndex++;
+          heroHeading.appendChild(span);
+        });
+      } else {
+        // Element node (e.g. <em>earns</em>) — wrap it whole so it stays one animated unit
+        const span = document.createElement("span");
+        span.className = "reveal-word";
+        span.style.animationDelay = (wordIndex * STAGGER).toFixed(2) + "s";
+        wordIndex++;
+        span.appendChild(node);
+        heroHeading.appendChild(span);
+      }
+    });
+  }
 });
