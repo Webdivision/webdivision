@@ -268,26 +268,18 @@ p { margin: 0; }
   text-align: center;
 }
 .hero-badge {
-  width: 76px;
-  height: 76px;
+  width: 84px;
+  height: 84px;
   margin: 0 auto 32px;
   border-radius: 20px;
-  background: linear-gradient(160deg, #2a2a2a 0%, #060606 65%);
-  border: 1px solid var(--line-strong);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 40px rgba(240,240,240,0.08), inset 0 1px 0 rgba(255,255,255,0.08);
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(240,240,240,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
 }
-.hero-badge span {
-  font-family: var(--serif);
-  font-size: 28px;
-  font-style: italic;
-  color: var(--ink);
-  background: linear-gradient(160deg, #fff, #8a8a8a);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.hero-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .hero h1 {
   font-size: clamp(38px, 5.6vw, 76px);
@@ -306,7 +298,7 @@ p { margin: 0; }
   filter: blur(9px);
   transform: translateY(10px);
   color: var(--muted-dim);
-  animation: word-reveal 1.7s cubic-bezier(.19,.84,.28,1) both;
+  animation: word-reveal 2.6s cubic-bezier(.19,.84,.28,1) both;
 }
 .hero h1 .reveal-word--dim {
   --end-color: var(--muted-dim);

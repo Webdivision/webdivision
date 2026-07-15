@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodes = Array.from(heroHeading.childNodes);
     heroHeading.innerHTML = "";
     let wordIndex = 0;
-    const STAGGER = 0.16; // seconds between each word (slower, more deliberate cascade)
+    const STAGGER = 0.26; // seconds between each word (slow, deliberate cascade)
 
     nodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
