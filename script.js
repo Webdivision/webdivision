@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.querySelector("[data-year]");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Kinetic word reveal for the hero headline
-  const heroHeading = document.querySelector(".hero h1");
+  // Kinetic word reveal — applied to every major heading on the site
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (heroHeading && !reduceMotion) {
-    const nodes = Array.from(heroHeading.childNodes);
-    heroHeading.innerHTML = "";
+  const STAGGER = 0.26; // seconds between each word (slow, deliberate cascade)
+
+  function wrapKineticWords(heading) {
+    const nodes = Array.from(heading.childNodes);
+    heading.innerHTML = "";
     let wordIndex = 0;
-    const STAGGER = 0.26; // seconds between each word (slow, deliberate cascade)
 
     nodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         parts.forEach((part) => {
           if (part === "") return;
           if (/^\s+$/.test(part)) {
-            heroHeading.appendChild(document.createTextNode(part));
+            heading.appendChild(document.createTextNode(part));
             return;
           }
           const span = document.createElement("span");
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
           span.textContent = part;
           span.style.animationDelay = (wordIndex * STAGGER).toFixed(2) + "s";
           wordIndex++;
-          heroHeading.appendChild(span);
+          heading.appendChild(span);
         });
       } else {
         // Element node (e.g. <em>earns</em>) — wrap it whole so it stays one animated unit,
@@ -75,8 +75,34 @@ document.addEventListener("DOMContentLoaded", () => {
         span.style.animationDelay = (wordIndex * STAGGER).toFixed(2) + "s";
         wordIndex++;
         span.appendChild(node);
-        heroHeading.appendChild(span);
+        heading.appendChild(span);
       }
     });
+  }
+
+  const kineticHeadings = document.querySelectorAll("main h1, main h2");
+  if (kineticHeadings.length) {
+    if (reduceMotion) {
+      // Skip the word-splitting entirely; headings just render as normal static text.
+      kineticHeadings.forEach((h) => h.classList.add("kinetic-in"));
+    } else {
+      kineticHeadings.forEach(wrapKineticWords);
+      if ("IntersectionObserver" in window) {
+        const kio = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("kinetic-in");
+                kio.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.35 }
+        );
+        kineticHeadings.forEach((h) => kio.observe(h));
+      } else {
+        kineticHeadings.forEach((h) => h.classList.add("kinetic-in"));
+      }
+    }
   }
 });

@@ -290,8 +290,8 @@ p { margin: 0; }
 }
 .hero h1 .dim { color: var(--muted-dim); }
 
-/* ---------- Kinetic word reveal (hero headline) ---------- */
-.hero h1 .reveal-word {
+/* ---------- Kinetic word reveal (all page headings) ---------- */
+.reveal-word {
   --end-color: var(--ink);
   display: inline-block;
   opacity: 0;
@@ -299,9 +299,13 @@ p { margin: 0; }
   transform: translateY(10px);
   color: var(--muted-dim);
   animation: word-reveal 2.6s cubic-bezier(.19,.84,.28,1) both;
+  animation-play-state: paused;
 }
-.hero h1 .reveal-word--dim {
+.reveal-word--dim {
   --end-color: var(--muted-dim);
+}
+.kinetic-in .reveal-word {
+  animation-play-state: running;
 }
 @keyframes word-reveal {
   0% {
@@ -329,8 +333,9 @@ p { margin: 0; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero h1 .reveal-word {
+  .reveal-word {
     animation: none;
+    animation-play-state: running;
     opacity: 1;
     filter: none;
     transform: none;
