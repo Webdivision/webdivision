@@ -102,15 +102,15 @@ p { margin: 0; }
   align-items: center;
   gap: 10px;
 }
-.eyebrow::before {
+.eyebrow::before,
+.eyebrow::after {
   content: "";
   width: 26px;
   height: 1px;
-  background: var(--line-strong);
+  background: var(--reveal-red);
   display: inline-block;
 }
 .center .eyebrow { justify-content: center; }
-.center .eyebrow::before { display: none; }
 
 /* ---------- Buttons ---------- */
 .btn {
