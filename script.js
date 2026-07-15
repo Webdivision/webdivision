@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nodes = Array.from(heroHeading.childNodes);
     heroHeading.innerHTML = "";
     let wordIndex = 0;
-    const STAGGER = 0.08; // seconds between each word
+    const STAGGER = 0.16; // seconds between each word (slower, more deliberate cascade)
 
     nodes.forEach((node) => {
       if (node.nodeType === Node.TEXT_NODE) {
@@ -68,9 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
           heroHeading.appendChild(span);
         });
       } else {
-        // Element node (e.g. <em>earns</em>) — wrap it whole so it stays one animated unit
+        // Element node (e.g. <em>earns</em>) — wrap it whole so it stays one animated unit,
+        // and mark it as a "dim" word so it settles to the muted italic color, not full ink.
         const span = document.createElement("span");
-        span.className = "reveal-word";
+        span.className = "reveal-word reveal-word--dim";
         span.style.animationDelay = (wordIndex * STAGGER).toFixed(2) + "s";
         wordIndex++;
         span.appendChild(node);

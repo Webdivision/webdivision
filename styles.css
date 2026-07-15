@@ -14,6 +14,7 @@
   --surface: rgba(240, 240, 240, 0.035);
   --surface-hover: rgba(240, 240, 240, 0.07);
   --glow: rgba(240, 240, 240, 0.5);
+  --reveal-red: #e03a2a;
 
   --serif: "Source Serif 4", "Iowan Old Style", serif;
   --sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -262,14 +263,14 @@ p { margin: 0; }
    ========================================================================== */
 .hero {
   position: relative;
-  padding: clamp(70px, 12vw, 130px) 0 clamp(60px, 8vw, 90px);
+  padding: clamp(28px, 5vw, 56px) 0 clamp(60px, 8vw, 90px);
   overflow: hidden;
   text-align: center;
 }
 .hero-badge {
   width: 76px;
   height: 76px;
-  margin: 0 auto 40px;
+  margin: 0 auto 32px;
   border-radius: 20px;
   background: linear-gradient(160deg, #2a2a2a 0%, #060606 65%);
   border: 1px solid var(--line-strong);
@@ -299,32 +300,40 @@ p { margin: 0; }
 
 /* ---------- Kinetic word reveal (hero headline) ---------- */
 .hero h1 .reveal-word {
+  --end-color: var(--ink);
   display: inline-block;
   opacity: 0;
   filter: blur(9px);
   transform: translateY(10px);
-  animation: word-reveal 0.9s cubic-bezier(.19,.84,.28,1) both;
+  color: var(--muted-dim);
+  animation: word-reveal 1.7s cubic-bezier(.19,.84,.28,1) both;
+}
+.hero h1 .reveal-word--dim {
+  --end-color: var(--muted-dim);
 }
 @keyframes word-reveal {
   0% {
     opacity: 0;
     filter: blur(9px);
-    transform: translateY(10px);
-    text-shadow: 0 0 0 rgba(240,240,240,0);
+    transform: translateY(14px);
+    color: var(--muted-dim);
+    text-shadow: 0 0 0 rgba(224,58,42,0);
   }
-  45% {
+  38% {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0);
   }
-  55% {
-    text-shadow: 0 0 26px rgba(240,240,240,0.65);
+  52% {
+    color: var(--reveal-red);
+    text-shadow: 0 0 32px rgba(224,58,42,0.8);
   }
   100% {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0);
-    text-shadow: 0 0 0 rgba(240,240,240,0);
+    color: var(--end-color);
+    text-shadow: 0 0 0 rgba(224,58,42,0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
