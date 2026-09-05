@@ -217,6 +217,9 @@ p { margin: 0; }
 }
 .nav-links a[aria-current="page"] { color: var(--ink); }
 .nav-cta { margin-left: 8px; }
+.nav-cta .btn {
+  padding-bottom: 14px;
+}
 
 .nav-toggle {
   display: none;
