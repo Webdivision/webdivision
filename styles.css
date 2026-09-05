@@ -220,6 +220,9 @@ p { margin: 0; }
 .nav-cta .btn {
   padding-bottom: 14px;
 }
+.nav-cta .btn::after {
+  display: none;
+}
 
 .nav-toggle {
   display: none;
