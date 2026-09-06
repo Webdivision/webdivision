@@ -913,12 +913,22 @@ section { position: relative; }
 /* ==========================================================================
    Work page
    ========================================================================== */
+.filter-label {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+  text-align: center;
+  margin: 34px 0 12px;
+}
 .work-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  margin-top: 34px;
+  margin-top: 0;
 }
 .filter-chip {
   border: 1px solid var(--line-strong);
